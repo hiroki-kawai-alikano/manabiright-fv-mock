@@ -146,23 +146,30 @@
     margin:14px auto 0;
   }
 
-  /* ========================= SP版 FV (375x812) ========================= */
+  /* ========================= SP版 FV (375x812) 上下分割 ========================= */
   .fv-sp {
     position:relative; width:375px; height:812px;
-    background:#000;
+    background:#fff;
     overflow:hidden;
     border:1px solid #ccc;
     border-radius:32px;
-    color:#fff;
+    color:var(--brand-navy);
   }
+  /* 写真エリア=ヘッダー直下の上半分 */
   .fv-sp .photo {
-    position:absolute; inset:0;
-    background-size:cover; background-position:center;
+    position:absolute; top:86px; left:0; right:0; height:360px;
+    background-size:cover; background-position:center 25%;
   }
   .fv-sp .gradient {
-    position:absolute; inset:0;
+    position:absolute; top:86px; left:0; right:0; height:360px;
     background:
-      linear-gradient(180deg, rgba(91,195,222,0.45) 0%, rgba(91,195,222,0.1) 30%, rgba(91,195,222,0.0) 55%, rgba(14,39,64,0.6) 100%);
+      linear-gradient(180deg, rgba(91,195,222,0.0) 0%, rgba(91,195,222,0.0) 70%, rgba(255,255,255,0.7) 100%);
+  }
+  /* コピーエリア=写真下の白/水色グラデ背景 */
+  .fv-sp .copy-area {
+    position:absolute; top:446px; left:0; right:0; bottom:60px;
+    background:linear-gradient(180deg, #ffffff 0%, #eaf6fb 100%);
+    padding:24px 24px 0;
   }
   /* SP版ヘッダー = 2段固定:白背景でクリーンに */
   .fv-sp .header {
@@ -188,6 +195,8 @@
     white-space:nowrap;
     scrollbar-width:none;
     -ms-overflow-style:none;
+    background:var(--brand-blue);
+    box-shadow:0 2px 6px rgba(42,143,176,0.18) inset;
   }
   .fv-sp .header-nav::-webkit-scrollbar { display:none; }
   .fv-sp .header-nav a {
@@ -196,43 +205,39 @@
     font-family:"Noto Sans JP",sans-serif; font-size:11px; font-weight:600;
     letter-spacing:0.08em;
     flex-shrink:0;
-    text-shadow:0 1px 3px rgba(14,39,64,0.18);
+    text-shadow:0 1px 2px rgba(14,39,64,0.15);
   }
   .fv-sp .copy {
-    position:absolute; bottom:120px; left:24px; right:24px;
-    z-index:5;
+    /* コピーエリア内部=上下分割の下段 */
   }
   .fv-sp .copy .tag {
     font-family:"Cormorant Garamond",serif; font-weight:500; font-size:10px;
     letter-spacing:0.35em; color:#fff; text-transform:uppercase;
-    margin-bottom:10px; display:inline-block;
-    background:var(--brand-blue-deep); padding:5px 12px; border-radius:2px;
-    box-shadow:0 2px 10px rgba(42,143,176,0.5);
+    margin-bottom:8px; display:inline-block;
+    background:var(--brand-blue-deep); padding:4px 10px; border-radius:2px;
+    box-shadow:0 2px 8px rgba(42,143,176,0.3);
   }
   .fv-sp .copy .tag-ja {
-    font-family:"Noto Sans JP",sans-serif; font-size:12px; font-weight:600;
-    letter-spacing:0.18em; color:#fff;
-    margin-bottom:18px;
-    text-shadow:0 1px 8px rgba(14,39,64,0.55);
+    font-family:"Noto Sans JP",sans-serif; font-size:11px; font-weight:600;
+    letter-spacing:0.16em; color:var(--brand-blue-deep);
+    margin-bottom:14px;
   }
   .fv-sp .copy .main {
     font-family:"Shippori Mincho",serif; font-weight:800;
-    font-size:68px; line-height:1.05; letter-spacing:0.04em;
-    color:#fff; margin-bottom:22px;
-    text-shadow:0 5px 24px rgba(14,39,64,0.55), 0 2px 8px rgba(14,39,64,0.35);
-    display:flex; flex-direction:column; gap:6px;
+    font-size:54px; line-height:1.05; letter-spacing:0.04em;
+    color:var(--brand-navy); margin-bottom:14px;
+    display:flex; flex-direction:column; gap:2px;
   }
   .fv-sp .copy .main .br-comma { display:block; width:100%; }
   .fv-sp .copy .main .line2 { display:block; width:100%; }
   .fv-sp .copy .sub {
     font-family:"Noto Serif JP",serif; font-weight:500;
-    font-size:14px; line-height:1.7; color:#fff;
+    font-size:13px; line-height:1.65; color:var(--brand-navy);
     letter-spacing:0.06em;
-    padding-top:14px;
+    padding-top:12px;
     border-top:2px solid var(--brand-yellow);
-    text-shadow:0 1px 8px rgba(14,39,64,0.45);
   }
-  .fv-sp .copy .sub b { font-weight:700; color:var(--brand-yellow); padding:0 3px; }
+  .fv-sp .copy .sub b { font-weight:700; color:var(--brand-blue-deep); padding:0 2px; }
   .fv-sp .cta-bottom {
     position:absolute; bottom:0; left:0; right:0;
     background:var(--brand-yellow); color:var(--brand-navy);
@@ -247,10 +252,10 @@
     content:'→'; font-family:"Noto Sans JP",sans-serif;
   }
 
-  /* 写真切替(AI生成:制服姿日本人受験生×未来を見上げる笑顔/自室オンライン指導) */
-  .photo-A { background-image:url('assets/ai-final-2.jpg'); background-position:center 30%; }
-  .photo-B { background-image:url('assets/ai-final-1.jpg'); background-position:center 25%; }
-  .photo-C { background-image:url('assets/ai-final-3.jpg'); background-position:center 25%; }
+  /* 写真切替(AI生成:実写感+日本制服+自然な日本人受験生) */
+  .photo-A { background-image:url('assets/real-1.jpg'); background-position:center 35%; }
+  .photo-B { background-image:url('assets/real-2.jpg'); background-position:center 28%; }
+  .photo-C { background-image:url('assets/real-3.jpg'); background-position:center 30%; }
 
   /* PC版コンパクト表示用スケール */
   .scale-pc { transform:scale(0.55); transform-origin:top left; margin-bottom:-405px; width:1442px; }
@@ -287,11 +292,11 @@
     ・資料請求CTAは派手すぎず、ヘッダー内のシンプルなボタン
   </div>
 
-  <!-- パターンA:オンライン指導・ビデオ通話・水色セーター -->
+  <!-- パターンA:青空×見上げる笑顔×日本制服 -->
   <div class="pattern-block">
-    <div class="pattern-title">パターンA:オンライン指導×ビデオ通話×水色セーター(=フルリモートど真ん中)<span class="recommend-tag">推奨</span></div>
+    <div class="pattern-title">パターンA:青空×見上げる笑顔×日本制服(=未来を向く希望感)<span class="recommend-tag">推奨</span></div>
     <p class="pattern-desc">
-      女子学生がノートPCでビデオ通話に手を振る笑顔=マナビライト「フルリモート個別指導」のリアルなシーン。明るい自然光+水色セーター+ブランド水色がビジュアルでリンク。
+      日本人女子高校生が紺ブレザー制服姿で青空を見上げる笑顔=「輝く未来へ。」コピーと完全一致するメタファー。希望感・未来志向ど真ん中。
     </p>
 
     <div class="device-row">
@@ -352,7 +357,7 @@
           <div class="copy">
             <span class="tag">For the Future</span>
             <div class="tag-ja">総合型選抜・推薦入試対策</div>
-            <h2 class="main">輝く未来へ。</h2>
+            <h2 class="main"><span class="br-comma">輝く、</span><span class="line2">未来へ。</span></h2>
             <div class="sub">令和の合格は、<b>戦略</b>で決まります。</div>
           </div>
           <div class="cta-bottom">無料で資料請求</div>
@@ -367,11 +372,11 @@
     </div>
   </div>
 
-  <!-- パターンB:オンライン授業×ヘッドセット集中 -->
+  <!-- パターンB:自室×ノートPC×セーラーブレザー -->
   <div class="pattern-block">
-    <div class="pattern-title">パターンB:オンライン授業×ヘッドセット集中(真剣度)</div>
+    <div class="pattern-title">パターンB:自室×ノートPC×セーラーブレザー(=フルリモート指導ど真ん中)</div>
     <p class="pattern-desc">
-      女子学生がヘッドセット+ノートPCで集中してオンライン授業を受けている=指導を真剣に受けている瞬間。マナビライトの「個別指導×伴走型」と整合。
+      日本人女子高校生が自宅自室でノートPCを開いて学習している=マナビライト「フルリモート個別指導」の実態シーン。本棚の日本的な家庭環境も含めてリアル。
     </p>
 
     <div class="device-row">
@@ -432,7 +437,7 @@
           <div class="copy">
             <span class="tag">For the Future</span>
             <div class="tag-ja">総合型選抜・推薦入試対策</div>
-            <h2 class="main">輝く未来へ。</h2>
+            <h2 class="main"><span class="br-comma">輝く、</span><span class="line2">未来へ。</span></h2>
             <div class="sub">令和の合格は、<b>戦略</b>で決まります。</div>
           </div>
           <div class="cta-bottom">無料で資料請求</div>
@@ -447,11 +452,11 @@
     </div>
   </div>
 
-  <!-- パターンC:屋外×ノートPC×自然光 -->
+  <!-- パターンC:自室セーラー×ノートPC×窓辺青空 -->
   <div class="pattern-block">
-    <div class="pattern-title">パターンC:屋外×ノートPC×自然光(=どこでも学べる開放感)</div>
+    <div class="pattern-title">パターンC:自室セーラー服×ノートPC×窓辺青空(=オンライン指導+希望感)</div>
     <p class="pattern-desc">
-      女子学生が屋外緑背景の中でノートPCに向き合う=「どこでも学べる」フルリモートの自由感+自然光の明るさ+ターゲット連想。
+      日本人女子高校生がセーラー服姿でノートPCに向き合いつつ、窓越しに青空が広がる=フルリモート指導+空に開かれた希望感の両立。
     </p>
 
     <div class="device-row">
@@ -512,7 +517,7 @@
           <div class="copy">
             <span class="tag">For the Future</span>
             <div class="tag-ja">総合型選抜・推薦入試対策</div>
-            <h2 class="main">輝く未来へ。</h2>
+            <h2 class="main"><span class="br-comma">輝く、</span><span class="line2">未来へ。</span></h2>
             <div class="sub">令和の合格は、<b>戦略</b>で決まります。</div>
           </div>
           <div class="cta-bottom">無料で資料請求</div>
@@ -551,16 +556,16 @@
 
   <!-- 推奨 -->
   <div class="pattern-block" style="background:#e8f7fc; border:2px solid #5BC3DE;">
-    <div class="pattern-title" style="color:#2A8FB0;">私のベスト推奨:パターンA(オンライン指導×ビデオ通話×水色セーター)</div>
+    <div class="pattern-title" style="color:#2A8FB0;">私のベスト推奨:パターンA(青空×見上げる笑顔×日本制服)</div>
     <div class="notes" style="background:#fff;">
       <b>3点理由:</b><br>
-      1. <b>マナビライトのサービス本体と完全一致</b>:「フルリモート個別指導」のリアルなシーン(=ノートPCでビデオ通話)、サービス内容と直結。<br>
-      2. <b>ブランド水色×写真水色セーターの相乗効果</b>:被写体の水色セーターがブランドカラーとリンクして、FV全体に水色トーンが立つ。<br>
-      3. <b>「輝く未来へ。」キャッチと整合する笑顔</b>:明るい自然光+前向きな笑顔=メインキャッチの世界観と完全一致。<br>
+      1. <b>「輝く未来へ。」キャッチとビジュアル完全一致</b>:青空を見上げる笑顔=未来を志向する象徴、メインキャッチの世界観をそのまま絵にした。<br>
+      2. <b>感情訴求が最強</b>:希望・前向きさが直球で伝わる、保護者にも「うちの子の未来」を連想させやすい。<br>
+      3. <b>「ブランドサイト」として品格が立つ</b>:単なる塾サイトじゃなく研究組織LABO感のあるブランド表現、競合差別化。<br>
       <br>
       <b>パターンB/Cの撤回理由:</b><br>
-      ・B(ヘッドセット集中):オンライン感は強いが暗め・笑顔がない=「輝く」と相性悪い<br>
-      ・C(屋外):明るく開放的だが、フルリモートの実態(=自宅から)とズレる、紙ペン要素も残る
+      ・B(自室セーラーブレザー):サービス実態(フルリモート指導)が直接伝わるが、未来感はAが上、感情訴求でAに劣る<br>
+      ・C(自室セーラー+窓辺青空):両立を狙ったが情報量多め、Aほどの瞬間訴求力は出ない
     </div>
   </div>
 
