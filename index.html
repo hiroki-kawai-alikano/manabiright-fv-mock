@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>マナビライト ブランドサイトFV改修案 — v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand-blue: #5BC3DE;
+    --brand-blue-deep: #2A8FB0;
+    --brand-yellow: #FFD54F;
+    --brand-yellow-deep: #F5B800;
+    --brand-navy: #0E2740;
+    --brand-text-on-yellow: #1A3A52;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { font-family: "Noto Sans JP",sans-serif; background:#eaeaea; color:#1a1a1a; }
+  body { padding:40px 0; }
+  .container { max-width: 1700px; margin: 0 auto; padding: 0 24px; }
+  h1.page-title { font-family:"Shippori Mincho",serif; font-weight:700; font-size:32px; margin-bottom:8px; letter-spacing:0.02em; }
+  .page-lead { color:#666; font-size:14px; line-height:1.7; margin-bottom:30px; }
+  .legend { background:#fffbea; border-left:4px solid #f0b400; padding:14px 18px; margin-bottom:36px; font-size:13px; line-height:1.8; }
+  .legend b { color:#1a4980; }
+
+  .pattern-block { background:#fff; border-radius:8px; padding:30px; margin-bottom:40px; box-shadow:0 4px 16px rgba(0,0,0,0.05); }
+  .pattern-title { font-family:"Shippori Mincho",serif; font-size:24px; font-weight:700; color:#1a4980; margin-bottom:4px; }
+  .pattern-desc { color:#666; font-size:13px; margin-bottom:20px; line-height:1.7; }
+  .recommend-tag {
+    display:inline-block; background:#f0b400; color:#fff;
+    font-size:12px; font-weight:700; padding:3px 10px;
+    border-radius:3px; margin-left:10px; vertical-align:middle;
+    font-family:"Noto Sans JP",sans-serif;
+  }
+  .device-row { display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap; }
+  .device-label { font-size:13px; color:#888; margin-bottom:8px; font-weight:500; letter-spacing:0.05em; }
+
+  /* ========================= PC版 FV (1440x900) ========================= */
+  .fv-pc {
+    position:relative; width:1440px; height:900px;
+    background:#000;
+    overflow:hidden;
+    border:1px solid #ccc;
+    color:#fff;
+  }
+  .fv-pc .photo {
+    position:absolute; inset:0;
+    background-size: cover; background-position: center;
+  }
+  /* 明るい水色グラデ=ブランドカラー主役+明るさ確保 */
+  .fv-pc .gradient {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(110deg, rgba(91,195,222,0.86) 0%, rgba(91,195,222,0.5) 38%, rgba(91,195,222,0.18) 70%, rgba(255,255,255,0.05) 100%),
+      linear-gradient(180deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.0) 60%, rgba(14,39,64,0.35) 100%);
+  }
+  /* ヘッダー(=上部固定sticky・白半透明で明るく) */
+  .fv-pc .header {
+    position:absolute; top:0; left:0; right:0; height:76px;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 48px; z-index:30;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter: blur(14px) saturate(180%);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    border-bottom:1px solid rgba(91,195,222,0.18);
+    box-shadow:0 1px 8px rgba(91,195,222,0.08);
+  }
+  .fv-pc .logo {
+    display:flex; align-items:center; gap:14px;
+  }
+  .fv-pc .logo img {
+    height:42px; width:auto; display:block;
+  }
+  .fv-pc .nav { display:flex; gap:36px; font-family:"Noto Sans JP",sans-serif; font-size:13px; font-weight:500; }
+  .fv-pc .nav a { color:var(--brand-navy); text-decoration:none; opacity:0.85; letter-spacing:0.08em; padding-bottom:4px; border-bottom:2px solid transparent; transition:.2s; }
+  .fv-pc .nav a:hover { opacity:1; border-bottom-color:var(--brand-blue); }
+  .fv-pc .cta-btn {
+    background:var(--brand-yellow); color:var(--brand-navy); padding:11px 22px;
+    font-weight:700; font-size:13px; letter-spacing:0.12em;
+    font-family:"Noto Sans JP",sans-serif;
+    display:flex; align-items:center; gap:8px;
+    border-radius:2px;
+    box-shadow:0 2px 12px rgba(245,184,0,0.4);
+  }
+
+  /* コピーエリア(=大学HP参考:固定ヘッダー76px+余白で配置) */
+  .fv-pc .copy {
+    position:absolute; top:230px; left:88px;
+    z-index:5; max-width:820px;
+  }
+  .fv-pc .copy .tag {
+    font-family:"Cormorant Garamond",serif; font-weight:400; font-size:15px;
+    letter-spacing:0.4em; color:#fff; text-transform:uppercase;
+    margin-bottom:14px; display:inline-flex; align-items:center; gap:14px;
+    background:var(--brand-blue-deep); padding:6px 18px; border-radius:2px;
+    box-shadow:0 4px 16px rgba(42,143,176,0.4);
+  }
+  .fv-pc .copy .tag-ja {
+    font-family:"Noto Sans JP",sans-serif; font-size:15px; font-weight:600;
+    letter-spacing:0.2em; color:#fff;
+    margin-bottom:34px;
+    text-shadow:0 2px 12px rgba(14,39,64,0.55);
+  }
+  .fv-pc .copy .main {
+    font-family:"Shippori Mincho",serif; font-weight:700;
+    font-size:124px; line-height:1.08; letter-spacing:0.04em;
+    color:#fff; margin-bottom:32px;
+    text-shadow:0 6px 32px rgba(14,39,64,0.45), 0 2px 8px rgba(14,39,64,0.3);
+  }
+  .fv-pc .copy .main .br-comma { display:block; }
+  .fv-pc .copy .sub {
+    font-family:"Noto Serif JP",serif; font-weight:500;
+    font-size:28px; line-height:1.7; color:#fff;
+    letter-spacing:0.08em;
+    padding-top:24px;
+    border-top:2px solid var(--brand-yellow);
+    max-width:680px;
+    text-shadow:0 2px 12px rgba(14,39,64,0.4);
+  }
+  .fv-pc .copy .sub b { font-weight:700; color:var(--brand-yellow); padding:0 4px; }
+
+  /* 下部情報バー(=白半透明で明るく) */
+  .fv-pc .infobar {
+    position:absolute; left:0; right:0; bottom:0;
+    padding:14px 48px; z-index:10;
+    display:flex; align-items:center; gap:24px;
+    background:rgba(255,255,255,0.94);
+    backdrop-filter: blur(14px) saturate(180%);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    border-top:1px solid rgba(91,195,222,0.18);
+  }
+  .fv-pc .infobar .label {
+    font-family:"Cormorant Garamond",serif; font-weight:600; font-size:13px;
+    letter-spacing:0.3em; color:var(--brand-blue-deep); text-transform:uppercase;
+    border-right:1px solid rgba(42,143,176,0.3); padding-right:24px;
+  }
+  .fv-pc .infobar .news {
+    font-family:"Noto Sans JP",sans-serif; font-size:13px;
+    color:var(--brand-navy); letter-spacing:0.05em;
+  }
+  .fv-pc .infobar .news b { font-weight:600; margin-right:14px; color:var(--brand-blue-deep); }
+  .fv-pc .scroll-hint {
+    position:absolute; right:48px; bottom:80px;
+    font-family:"Cormorant Garamond",serif; font-weight:500; font-size:12px;
+    letter-spacing:0.4em; color:#fff; text-transform:uppercase;
+    writing-mode:vertical-rl; z-index:5;
+    text-shadow:0 2px 8px rgba(14,39,64,0.5);
+  }
+  .fv-pc .scroll-hint::after {
+    content:''; display:block; width:1px; height:48px; background:#fff;
+    margin:14px auto 0;
+  }
+
+  /* ========================= SP版 FV (375x812) ========================= */
+  .fv-sp {
+    position:relative; width:375px; height:812px;
+    background:#000;
+    overflow:hidden;
+    border:1px solid #ccc;
+    border-radius:32px;
+    color:#fff;
+  }
+  .fv-sp .photo {
+    position:absolute; inset:0;
+    background-size:cover; background-position:center;
+  }
+  .fv-sp .gradient {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(91,195,222,0.45) 0%, rgba(91,195,222,0.1) 30%, rgba(91,195,222,0.0) 55%, rgba(14,39,64,0.6) 100%);
+  }
+  /* SP版ヘッダー = 2段固定:白半透明 */
+  .fv-sp .header {
+    position:absolute; top:0; left:0; right:0; z-index:30;
+    background:rgba(255,255,255,0.94);
+    backdrop-filter:blur(14px) saturate(180%);
+    -webkit-backdrop-filter:blur(14px) saturate(180%);
+    border-bottom:1px solid rgba(91,195,222,0.2);
+  }
+  .fv-sp .header-top {
+    height:48px;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 16px;
+    border-bottom:1px solid rgba(91,195,222,0.15);
+  }
+  .fv-sp .logo-sp img {
+    height:28px; width:auto; display:block;
+  }
+  .fv-sp .header-cta {
+    background:var(--brand-yellow); color:var(--brand-navy);
+    padding:6px 12px;
+    font-family:"Noto Sans JP",sans-serif; font-size:10px; font-weight:700;
+    letter-spacing:0.12em;
+  }
+  .fv-sp .header-nav {
+    height:38px;
+    display:flex; align-items:center; gap:18px;
+    padding:0 16px;
+    overflow-x:auto; overflow-y:hidden;
+    white-space:nowrap;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+  }
+  .fv-sp .header-nav::-webkit-scrollbar { display:none; }
+  .fv-sp .header-nav a {
+    color:var(--brand-navy);
+    opacity:0.88;
+    text-decoration:none;
+    font-family:"Noto Sans JP",sans-serif; font-size:11px; font-weight:500;
+    letter-spacing:0.08em;
+    flex-shrink:0;
+  }
+  .fv-sp .copy {
+    position:absolute; bottom:120px; left:24px; right:24px;
+    z-index:5;
+  }
+  .fv-sp .copy .tag {
+    font-family:"Cormorant Garamond",serif; font-weight:500; font-size:10px;
+    letter-spacing:0.35em; color:#fff; text-transform:uppercase;
+    margin-bottom:10px; display:inline-block;
+    background:var(--brand-blue-deep); padding:5px 12px; border-radius:2px;
+    box-shadow:0 2px 10px rgba(42,143,176,0.5);
+  }
+  .fv-sp .copy .tag-ja {
+    font-family:"Noto Sans JP",sans-serif; font-size:12px; font-weight:600;
+    letter-spacing:0.18em; color:#fff;
+    margin-bottom:18px;
+    text-shadow:0 1px 8px rgba(14,39,64,0.55);
+  }
+  .fv-sp .copy .main {
+    font-family:"Shippori Mincho",serif; font-weight:700;
+    font-size:64px; line-height:1.1; letter-spacing:0.03em;
+    color:#fff; margin-bottom:18px;
+    text-shadow:0 4px 18px rgba(14,39,64,0.5), 0 1px 4px rgba(14,39,64,0.3);
+  }
+  .fv-sp .copy .main .br-comma { display:block; }
+  .fv-sp .copy .sub {
+    font-family:"Noto Serif JP",serif; font-weight:500;
+    font-size:14px; line-height:1.7; color:#fff;
+    letter-spacing:0.06em;
+    padding-top:14px;
+    border-top:2px solid var(--brand-yellow);
+    text-shadow:0 1px 8px rgba(14,39,64,0.45);
+  }
+  .fv-sp .copy .sub b { font-weight:700; color:var(--brand-yellow); padding:0 3px; }
+  .fv-sp .cta-bottom {
+    position:absolute; bottom:0; left:0; right:0;
+    background:var(--brand-yellow); color:var(--brand-navy);
+    padding:16px 0; text-align:center;
+    font-family:"Noto Sans JP",sans-serif; font-size:13px; font-weight:700;
+    letter-spacing:0.18em;
+    z-index:10;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    box-shadow:0 -2px 16px rgba(245,184,0,0.35);
+  }
+  .fv-sp .cta-bottom::after {
+    content:'→'; font-family:"Noto Sans JP",sans-serif;
+  }
+
+  /* 写真切替(AI生成:日本人受験生×水色×ノートPC×明るい自然光) */
+  .photo-A { background-image:url('assets/ai1.jpg'); background-position:center 28%; }
+  .photo-B { background-image:url('assets/ai2.jpg'); background-position:center 30%; }
+  .photo-C { background-image:url('assets/ai3.jpg'); background-position:center 25%; }
+
+  /* PC版コンパクト表示用スケール */
+  .scale-pc { transform:scale(0.55); transform-origin:top left; margin-bottom:-405px; width:1442px; }
+
+  .notes {
+    margin-top:24px; padding:16px 20px; background:#f8f9fc;
+    border-radius:4px; font-size:13px; line-height:1.8;
+  }
+  .notes b { color:#1a4980; }
+
+  .typography-note {
+    margin-top:20px; padding:16px 20px; background:#fff7f7;
+    border-left:3px solid var(--brand-yellow);
+    border-radius:4px; font-size:13px; line-height:1.8;
+  }
+  .typography-note b { color:var(--brand-yellow); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1 class="page-title">マナビライト ブランドサイトFV 改修案 v2 — 大学HP風の品格</h1>
+  <p class="page-lead">
+    早稲田/慶應/ICU/上智/立教/明治のFVデザインを参考に、密度・余白・タイポを再設計。<br>
+    人物写真メイン+下部に情報バー追加+SP版「輝く未来へ。」を1行で収まるよう48px調整。
+  </p>
+
+  <div class="legend">
+    <b>大学HPからの学習ポイント:</b><br>
+    ・コピーは左上〜中央寄せ、密度はタイトめ(余白を空けすぎない)<br>
+    ・写真は人物・校舎・自然(=実体感)、抽象的な風景は使われていない<br>
+    ・下部に「TOPICS」「NEWS」帯=情報密度を上げ、ブランド企業らしさを補強<br>
+    ・タイポは明朝メイン+英文セリフ(Cormorant Garamond等)タグライン=知の象徴<br>
+    ・資料請求CTAは派手すぎず、ヘッダー内のシンプルなボタン
+  </div>
+
+  <!-- パターンA:オンライン指導・ビデオ通話・水色セーター -->
+  <div class="pattern-block">
+    <div class="pattern-title">パターンA:オンライン指導×ビデオ通話×水色セーター(=フルリモートど真ん中)<span class="recommend-tag">推奨</span></div>
+    <p class="pattern-desc">
+      女子学生がノートPCでビデオ通話に手を振る笑顔=マナビライト「フルリモート個別指導」のリアルなシーン。明るい自然光+水色セーター+ブランド水色がビジュアルでリンク。
+    </p>
+
+    <div class="device-row">
+      <div>
+        <div class="device-label">PC版 / 1440 × 900</div>
+        <div class="scale-pc">
+          <div class="fv-pc">
+            <div class="photo photo-A"></div>
+            <div class="gradient"></div>
+            <header class="header">
+              <div class="logo">
+                <img src="assets/logo_s_long.png" alt="マナビライト 総合型選抜/推薦入試">
+              </div>
+              <nav class="nav">
+                <a>マナビライトの特徴</a>
+                <a>総合型選抜・推薦入試</a>
+                <a>カリキュラム</a>
+                <a>料金</a>
+                <a>無料受験相談</a>
+              </nav>
+              <div class="cta-btn">資料請求</div>
+            </header>
+            <div class="copy">
+              <span class="tag">For the Future</span>
+              <div class="tag-ja">総合型選抜・推薦入試対策</div>
+              <h2 class="main"><span class="br-comma">輝く、</span>未来へ。</h2>
+              <div class="sub">令和の合格は、<b>戦略</b>で決まります。</div>
+            </div>
+            <div class="scroll-hint">SCROLL</div>
+            <div class="infobar">
+              <span class="label">TOPICS</span>
+              <span class="news"><b>2026.05.25</b>「合格者の軌跡」プロジェクト始動 ─ 第1弾:東洋大学 中林さんの軌跡</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="device-label">SP版 / 375 × 812</div>
+        <div class="fv-sp">
+          <div class="photo photo-A"></div>
+          <div class="gradient"></div>
+          <header class="header">
+            <div class="header-top">
+              <div class="logo-sp">
+                <img src="assets/logo_s_long.png" alt="マナビライト">
+              </div>
+              <div class="header-cta">資料請求</div>
+            </div>
+            <nav class="header-nav">
+              <a>特徴</a>
+              <a>総合型選抜・推薦入試</a>
+              <a>カリキュラム</a>
+              <a>料金</a>
+              <a>無料受験相談</a>
+              <a>合格者の軌跡</a>
+            </nav>
+          </header>
+          <div class="copy">
+            <span class="tag">For the Future</span>
+            <div class="tag-ja">総合型選抜・推薦入試対策</div>
+            <h2 class="main">輝く未来へ。</h2>
+            <div class="sub">令和の合格は、<b>戦略</b>で決まります。</div>
+          </div>
+          <div class="cta-bottom">無料で資料請求</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <b>狙い:</b> マナビライトの「フルリモート個別指導」を直接ビジュアル化、サービス内容と完全一致<br>
+      <b>強み:</b> オンライン指導◎ / 明るい・笑顔=ブランド「輝く未来へ」と整合◎ / 水色セーター=ブランド水色とリンク◎<br>
+      <b>リスク:</b> 単独写真=対象が高校生か大学生か曖昧、年齢感はやや上(=でも保護者層には親近感あり)
+    </div>
+  </div>
+
+  <!-- パターンB:オンライン授業×ヘッドセット集中 -->
+  <div class="pattern-block">
+    <div class="pattern-title">パターンB:オンライン授業×ヘッドセット集中(真剣度)</div>
+    <p class="pattern-desc">
+      女子学生がヘッドセット+ノートPCで集中してオンライン授業を受けている=指導を真剣に受けている瞬間。マナビライトの「個別指導×伴走型」と整合。
+    </p>
+
+    <div class="device-row">
+      <div>
+        <div class="device-label">PC版 / 1440 × 900</div>
+        <div class="scale-pc">
+          <div class="fv-pc">
+            <div class="photo photo-B"></div>
+            <div class="gradient"></div>
+            <header class="header">
+              <div class="logo">
+                <img src="assets/logo_s_long.png" alt="マナビライト 総合型選抜/推薦入試">
+              </div>
+              <nav class="nav">
+                <a>マナビライトの特徴</a>
+                <a>総合型選抜・推薦入試</a>
+                <a>カリキュラム</a>
+                <a>料金</a>
+                <a>無料受験相談</a>
+              </nav>
+              <div class="cta-btn">資料請求</div>
+            </header>
+            <div class="copy">
+              <span class="tag">For the Future</span>
+              <div class="tag-ja">総合型選抜・推薦入試対策</div>
+              <h2 class="main"><span class="br-comma">輝く、</span>未来へ。</h2>
+              <div class="sub">令和の合格は、<b>戦略</b>で決まります。</div>
+            </div>
+            <div class="scroll-hint">SCROLL</div>
+            <div class="infobar">
+              <span class="label">TOPICS</span>
+              <span class="news"><b>2026.05.25</b>「合格者の軌跡」プロジェクト始動 ─ 第1弾:東洋大学 中林さんの軌跡</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="device-label">SP版 / 375 × 812</div>
+        <div class="fv-sp">
+          <div class="photo photo-B"></div>
+          <div class="gradient"></div>
+          <header class="header">
+            <div class="header-top">
+              <div class="logo-sp">
+                <img src="assets/logo_s_long.png" alt="マナビライト">
+              </div>
+              <div class="header-cta">資料請求</div>
+            </div>
+            <nav class="header-nav">
+              <a>特徴</a>
+              <a>総合型選抜・推薦入試</a>
+              <a>カリキュラム</a>
+              <a>料金</a>
+              <a>無料受験相談</a>
+              <a>合格者の軌跡</a>
+            </nav>
+          </header>
+          <div class="copy">
+            <span class="tag">For the Future</span>
+            <div class="tag-ja">総合型選抜・推薦入試対策</div>
+            <h2 class="main">輝く未来へ。</h2>
+            <div class="sub">令和の合格は、<b>戦略</b>で決まります。</div>
+          </div>
+          <div class="cta-bottom">無料で資料請求</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <b>狙い:</b> ヘッドセット+ノートPC=オンライン授業の真剣な瞬間、伴走型指導を集中して受ける受験生<br>
+      <b>強み:</b> オンライン指導◎ / 集中・真剣度◎ / 室内自然光で明るい<br>
+      <b>リスク:</b> 笑顔がない=ブランド「輝く」キャッチとのトーン微妙、保護者にやや暗く映る可能性
+    </div>
+  </div>
+
+  <!-- パターンC:屋外×ノートPC×自然光 -->
+  <div class="pattern-block">
+    <div class="pattern-title">パターンC:屋外×ノートPC×自然光(=どこでも学べる開放感)</div>
+    <p class="pattern-desc">
+      女子学生が屋外緑背景の中でノートPCに向き合う=「どこでも学べる」フルリモートの自由感+自然光の明るさ+ターゲット連想。
+    </p>
+
+    <div class="device-row">
+      <div>
+        <div class="device-label">PC版 / 1440 × 900</div>
+        <div class="scale-pc">
+          <div class="fv-pc">
+            <div class="photo photo-C"></div>
+            <div class="gradient"></div>
+            <header class="header">
+              <div class="logo">
+                <img src="assets/logo_s_long.png" alt="マナビライト 総合型選抜/推薦入試">
+              </div>
+              <nav class="nav">
+                <a>マナビライトの特徴</a>
+                <a>総合型選抜・推薦入試</a>
+                <a>カリキュラム</a>
+                <a>料金</a>
+                <a>無料受験相談</a>
+              </nav>
+              <div class="cta-btn">資料請求</div>
+            </header>
+            <div class="copy">
+              <span class="tag">For the Future</span>
+              <div class="tag-ja">総合型選抜・推薦入試対策</div>
+              <h2 class="main"><span class="br-comma">輝く、</span>未来へ。</h2>
+              <div class="sub">令和の合格は、<b>戦略</b>で決まります。</div>
+            </div>
+            <div class="scroll-hint">SCROLL</div>
+            <div class="infobar">
+              <span class="label">TOPICS</span>
+              <span class="news"><b>2026.05.25</b>「合格者の軌跡」プロジェクト始動 ─ 第1弾:東洋大学 中林さんの軌跡</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="device-label">SP版 / 375 × 812</div>
+        <div class="fv-sp">
+          <div class="photo photo-C"></div>
+          <div class="gradient"></div>
+          <header class="header">
+            <div class="header-top">
+              <div class="logo-sp">
+                <img src="assets/logo_s_long.png" alt="マナビライト">
+              </div>
+              <div class="header-cta">資料請求</div>
+            </div>
+            <nav class="header-nav">
+              <a>特徴</a>
+              <a>総合型選抜・推薦入試</a>
+              <a>カリキュラム</a>
+              <a>料金</a>
+              <a>無料受験相談</a>
+              <a>合格者の軌跡</a>
+            </nav>
+          </header>
+          <div class="copy">
+            <span class="tag">For the Future</span>
+            <div class="tag-ja">総合型選抜・推薦入試対策</div>
+            <h2 class="main">輝く未来へ。</h2>
+            <div class="sub">令和の合格は、<b>戦略</b>で決まります。</div>
+          </div>
+          <div class="cta-bottom">無料で資料請求</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <b>狙い:</b> 「フルリモート=どこでも学べる」マナビライトのコア価値+自然光の明るさ<br>
+      <b>強み:</b> 自由感・開放感◎ / 自然光で明るい◎ / 屋外で爽やか<br>
+      <b>リスク:</b> 屋外で勉強=実態と少しズレる(=家から学ぶケースの方が多い)、紙のペンも持ってる
+    </div>
+  </div>
+
+  <!-- タイポ仕様詳細 -->
+  <div class="pattern-block">
+    <div class="pattern-title">タイポグラフィ仕様(v2)</div>
+    <div class="typography-note">
+      <b>メインキャッチ「輝く未来へ。」</b>:Shippori Mincho 700、PC=128px / SP=48px、letter-spacing=0.04em(PC)/0.02em(SP)、SP版は1行 white-space:nowrap 保証<br>
+      <b>サブ「令和の合格は、戦略で決まります。」</b>:Noto Serif JP 400、PC=26px / SP=13px、「戦略」だけ Weight 600+var(--brand-yellow) で強調(=タグ色と統一)<br>
+      <b>タグ「For the Future」</b>:Cormorant Garamond 300、英文セリフ、letter-spacing=0.4em、横ライン併用(大学HPの慶應「Find Your Inspiration at Keio」風)<br>
+      <b>タグ和文「総合型選抜・推薦入試対策」</b>:Noto Sans JP 500、英文タグの下層、letter-spacing=0.2em<br>
+      <b>ロゴ「マナビライト」+「Manabi Light」</b>:Shippori Mincho 700+Cormorant Garamond 400 の二段組(大学HP=「早稲田大学」+「WASEDA University」型)<br>
+      <b>下部TOPICS</b>:Cormorant Garamond ラベル+Noto Sans JP ニュース=大学HP「TOPICS」「NEWS」帯参考<br>
+      <b>SCROLL縦書きヒント</b>:Cormorant Garamond 300、右下、letter-spacing=0.4em
+    </div>
+    <div class="notes">
+      <b>4フォント体系(v2で1フォント追加):</b><br>
+      ・Shippori Mincho = メインキャッチ・ロゴ(和文ブランド)<br>
+      ・Noto Serif JP = サブコピー(明朝で品格を維持しつつメインと差別化)<br>
+      ・Noto Sans JP = ナビ・タグ和文(モダンサンセリフ)<br>
+      ・Cormorant Garamond = 英文タグライン・ラベル(大学HP風の知の象徴)<br>
+      <b>SP改行問題の修正:</b>「輝く未来へ。」は SP=48px に下げ、white-space:nowrap で1行強制
+    </div>
+  </div>
+
+  <!-- 推奨 -->
+  <div class="pattern-block" style="background:#e8f7fc; border:2px solid #5BC3DE;">
+    <div class="pattern-title" style="color:#2A8FB0;">私のベスト推奨:パターンA(オンライン指導×ビデオ通話×水色セーター)</div>
+    <div class="notes" style="background:#fff;">
+      <b>3点理由:</b><br>
+      1. <b>マナビライトのサービス本体と完全一致</b>:「フルリモート個別指導」のリアルなシーン(=ノートPCでビデオ通話)、サービス内容と直結。<br>
+      2. <b>ブランド水色×写真水色セーターの相乗効果</b>:被写体の水色セーターがブランドカラーとリンクして、FV全体に水色トーンが立つ。<br>
+      3. <b>「輝く未来へ。」キャッチと整合する笑顔</b>:明るい自然光+前向きな笑顔=メインキャッチの世界観と完全一致。<br>
+      <br>
+      <b>パターンB/Cの撤回理由:</b><br>
+      ・B(ヘッドセット集中):オンライン感は強いが暗め・笑顔がない=「輝く」と相性悪い<br>
+      ・C(屋外):明るく開放的だが、フルリモートの実態(=自宅から)とズレる、紙ペン要素も残る
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
