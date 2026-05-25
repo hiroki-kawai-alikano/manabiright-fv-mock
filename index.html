@@ -55,39 +55,35 @@
       linear-gradient(110deg, rgba(91,195,222,0.86) 0%, rgba(91,195,222,0.5) 38%, rgba(91,195,222,0.18) 70%, rgba(255,255,255,0.05) 100%),
       linear-gradient(180deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.0) 60%, rgba(14,39,64,0.35) 100%);
   }
-  /* ヘッダー(=上部固定sticky・白半透明で明るく) */
+  /* ヘッダー(=上部固定sticky・水色基調でブランドカラー定着) */
   .fv-pc .header {
     position:absolute; top:0; left:0; right:0; height:76px;
     display:flex; align-items:center; justify-content:space-between;
     padding:0 48px; z-index:30;
-    background:rgba(255,255,255,0.92);
-    backdrop-filter: blur(14px) saturate(180%);
-    -webkit-backdrop-filter: blur(14px) saturate(180%);
-    border-bottom:1px solid rgba(91,195,222,0.18);
-    box-shadow:0 1px 8px rgba(91,195,222,0.08);
+    background:linear-gradient(180deg, rgba(91,195,222,0.98) 0%, rgba(91,195,222,0.94) 100%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom:1px solid rgba(255,255,255,0.25);
+    box-shadow:0 2px 12px rgba(42,143,176,0.18);
   }
   .fv-pc .logo {
     display:flex; align-items:center; gap:14px;
+    background:#fff; padding:8px 16px; border-radius:2px;
+    box-shadow:0 2px 8px rgba(14,39,64,0.08);
   }
   .fv-pc .logo img {
-    height:42px; width:auto; display:block;
+    height:38px; width:auto; display:block;
   }
-  .fv-pc .nav { display:flex; gap:36px; font-family:"Noto Sans JP",sans-serif; font-size:13px; font-weight:500; }
-  .fv-pc .nav a { color:var(--brand-navy); text-decoration:none; opacity:0.85; letter-spacing:0.08em; padding-bottom:4px; border-bottom:2px solid transparent; transition:.2s; }
-  .fv-pc .nav a:hover { opacity:1; border-bottom-color:var(--brand-blue); }
-  .fv-pc .cta-btn {
-    background:var(--brand-yellow); color:var(--brand-navy); padding:11px 22px;
-    font-weight:700; font-size:13px; letter-spacing:0.12em;
-    font-family:"Noto Sans JP",sans-serif;
-    display:flex; align-items:center; gap:8px;
-    border-radius:2px;
-    box-shadow:0 2px 12px rgba(245,184,0,0.4);
-  }
+  .fv-pc .nav { display:flex; gap:36px; font-family:"Noto Sans JP",sans-serif; font-size:13px; font-weight:600; }
+  .fv-pc .nav a { color:#fff; text-decoration:none; letter-spacing:0.08em; padding-bottom:4px; border-bottom:2px solid transparent; transition:.2s; text-shadow:0 1px 4px rgba(14,39,64,0.18); }
+  .fv-pc .nav a:hover { border-bottom-color:#fff; }
+  .fv-pc .cta-btn { display:block; }
+  .fv-pc .cta-btn img { height:50px; width:auto; display:block; box-shadow:0 2px 12px rgba(14,39,64,0.18); border-radius:2px; }
 
-  /* コピーエリア(=大学HP参考:固定ヘッダー76px+余白で配置) */
+  /* コピーエリア(=大写しで配置、メインキャッチ大きく) */
   .fv-pc .copy {
-    position:absolute; top:230px; left:88px;
-    z-index:5; max-width:820px;
+    position:absolute; top:180px; left:80px;
+    z-index:5; max-width:920px;
   }
   .fv-pc .copy .tag {
     font-family:"Cormorant Garamond",serif; font-weight:400; font-size:15px;
@@ -103,12 +99,12 @@
     text-shadow:0 2px 12px rgba(14,39,64,0.55);
   }
   .fv-pc .copy .main {
-    font-family:"Shippori Mincho",serif; font-weight:700;
-    font-size:124px; line-height:1.08; letter-spacing:0.04em;
-    color:#fff; margin-bottom:32px;
-    text-shadow:0 6px 32px rgba(14,39,64,0.45), 0 2px 8px rgba(14,39,64,0.3);
+    font-family:"Shippori Mincho",serif; font-weight:800;
+    font-size:168px; line-height:1.0; letter-spacing:0.06em;
+    color:#fff; margin-bottom:36px;
+    text-shadow:0 8px 40px rgba(14,39,64,0.55), 0 3px 12px rgba(14,39,64,0.4), 0 1px 0 rgba(255,255,255,0.1);
   }
-  .fv-pc .copy .main .br-comma { display:block; }
+  .fv-pc .copy .main .br-comma { display:block; margin-bottom:8px; }
   .fv-pc .copy .sub {
     font-family:"Noto Serif JP",serif; font-weight:500;
     font-size:28px; line-height:1.7; color:#fff;
@@ -170,29 +166,26 @@
     background:
       linear-gradient(180deg, rgba(91,195,222,0.45) 0%, rgba(91,195,222,0.1) 30%, rgba(91,195,222,0.0) 55%, rgba(14,39,64,0.6) 100%);
   }
-  /* SP版ヘッダー = 2段固定:白半透明 */
+  /* SP版ヘッダー = 2段固定:水色基調 */
   .fv-sp .header {
     position:absolute; top:0; left:0; right:0; z-index:30;
-    background:rgba(255,255,255,0.94);
-    backdrop-filter:blur(14px) saturate(180%);
-    -webkit-backdrop-filter:blur(14px) saturate(180%);
-    border-bottom:1px solid rgba(91,195,222,0.2);
+    background:linear-gradient(180deg, rgba(91,195,222,0.98) 0%, rgba(91,195,222,0.94) 100%);
+    box-shadow:0 2px 8px rgba(42,143,176,0.18);
   }
   .fv-sp .header-top {
-    height:48px;
+    height:50px;
     display:flex; align-items:center; justify-content:space-between;
-    padding:0 16px;
-    border-bottom:1px solid rgba(91,195,222,0.15);
+    padding:0 12px;
+    border-bottom:1px solid rgba(255,255,255,0.25);
+  }
+  .fv-sp .logo-sp {
+    background:#fff; padding:5px 10px; border-radius:2px;
+    box-shadow:0 1px 4px rgba(14,39,64,0.08);
   }
   .fv-sp .logo-sp img {
-    height:28px; width:auto; display:block;
+    height:24px; width:auto; display:block;
   }
-  .fv-sp .header-cta {
-    background:var(--brand-yellow); color:var(--brand-navy);
-    padding:6px 12px;
-    font-family:"Noto Sans JP",sans-serif; font-size:10px; font-weight:700;
-    letter-spacing:0.12em;
-  }
+  .fv-sp .header-cta img { height:36px; width:auto; display:block; border-radius:2px; box-shadow:0 1px 4px rgba(14,39,64,0.18); }
   .fv-sp .header-nav {
     height:38px;
     display:flex; align-items:center; gap:18px;
@@ -204,12 +197,12 @@
   }
   .fv-sp .header-nav::-webkit-scrollbar { display:none; }
   .fv-sp .header-nav a {
-    color:var(--brand-navy);
-    opacity:0.88;
+    color:#fff;
     text-decoration:none;
-    font-family:"Noto Sans JP",sans-serif; font-size:11px; font-weight:500;
+    font-family:"Noto Sans JP",sans-serif; font-size:11px; font-weight:600;
     letter-spacing:0.08em;
     flex-shrink:0;
+    text-shadow:0 1px 3px rgba(14,39,64,0.18);
   }
   .fv-sp .copy {
     position:absolute; bottom:120px; left:24px; right:24px;
@@ -229,12 +222,12 @@
     text-shadow:0 1px 8px rgba(14,39,64,0.55);
   }
   .fv-sp .copy .main {
-    font-family:"Shippori Mincho",serif; font-weight:700;
-    font-size:64px; line-height:1.1; letter-spacing:0.03em;
-    color:#fff; margin-bottom:18px;
-    text-shadow:0 4px 18px rgba(14,39,64,0.5), 0 1px 4px rgba(14,39,64,0.3);
+    font-family:"Shippori Mincho",serif; font-weight:800;
+    font-size:78px; line-height:1.0; letter-spacing:0.04em;
+    color:#fff; margin-bottom:22px;
+    text-shadow:0 5px 24px rgba(14,39,64,0.55), 0 2px 8px rgba(14,39,64,0.35);
   }
-  .fv-sp .copy .main .br-comma { display:block; }
+  .fv-sp .copy .main .br-comma { display:block; margin-bottom:4px; }
   .fv-sp .copy .sub {
     font-family:"Noto Serif JP",serif; font-weight:500;
     font-size:14px; line-height:1.7; color:#fff;
@@ -258,10 +251,10 @@
     content:'→'; font-family:"Noto Sans JP",sans-serif;
   }
 
-  /* 写真切替(AI生成:日本人受験生×水色×ノートPC×明るい自然光) */
-  .photo-A { background-image:url('assets/ai1.jpg'); background-position:center 28%; }
-  .photo-B { background-image:url('assets/ai2.jpg'); background-position:center 30%; }
-  .photo-C { background-image:url('assets/ai3.jpg'); background-position:center 25%; }
+  /* 写真切替(AI生成:制服姿日本人受験生×ノートPC×笑顔) */
+  .photo-A { background-image:url('assets/ai-uniform-1.jpg'); background-position:center 25%; }
+  .photo-B { background-image:url('assets/ai-uniform-2.jpg'); background-position:center 28%; }
+  .photo-C { background-image:url('assets/ai-uniform-3.jpg'); background-position:center 22%; }
 
   /* PC版コンパクト表示用スケール */
   .scale-pc { transform:scale(0.55); transform-origin:top left; margin-bottom:-405px; width:1442px; }
@@ -323,7 +316,7 @@
                 <a>料金</a>
                 <a>無料受験相談</a>
               </nav>
-              <div class="cta-btn">資料請求</div>
+              <a class="cta-btn" href="#"><img src="assets/cta-head_s_document.png" alt="資料請求"></a>
             </header>
             <div class="copy">
               <span class="tag">For the Future</span>
@@ -349,7 +342,7 @@
               <div class="logo-sp">
                 <img src="assets/logo_s_long.png" alt="マナビライト">
               </div>
-              <div class="header-cta">資料請求</div>
+              <a class="header-cta" href="#"><img src="assets/cta-head_s_document.png" alt="資料請求"></a>
             </div>
             <nav class="header-nav">
               <a>特徴</a>
@@ -403,7 +396,7 @@
                 <a>料金</a>
                 <a>無料受験相談</a>
               </nav>
-              <div class="cta-btn">資料請求</div>
+              <a class="cta-btn" href="#"><img src="assets/cta-head_s_document.png" alt="資料請求"></a>
             </header>
             <div class="copy">
               <span class="tag">For the Future</span>
@@ -429,7 +422,7 @@
               <div class="logo-sp">
                 <img src="assets/logo_s_long.png" alt="マナビライト">
               </div>
-              <div class="header-cta">資料請求</div>
+              <a class="header-cta" href="#"><img src="assets/cta-head_s_document.png" alt="資料請求"></a>
             </div>
             <nav class="header-nav">
               <a>特徴</a>
@@ -483,7 +476,7 @@
                 <a>料金</a>
                 <a>無料受験相談</a>
               </nav>
-              <div class="cta-btn">資料請求</div>
+              <a class="cta-btn" href="#"><img src="assets/cta-head_s_document.png" alt="資料請求"></a>
             </header>
             <div class="copy">
               <span class="tag">For the Future</span>
@@ -509,7 +502,7 @@
               <div class="logo-sp">
                 <img src="assets/logo_s_long.png" alt="マナビライト">
               </div>
-              <div class="header-cta">資料請求</div>
+              <a class="header-cta" href="#"><img src="assets/cta-head_s_document.png" alt="資料請求"></a>
             </div>
             <nav class="header-nav">
               <a>特徴</a>
