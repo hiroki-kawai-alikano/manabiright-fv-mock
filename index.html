@@ -8,8 +8,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --brand-blue: #5BC3DE;
-    --brand-blue-deep: #2A8FB0;
+    /* マナビライト公式カラー(既存FV画像pixel抽出済) */
+    --brand-blue: #60BAE8;
+    --brand-blue-deep: #008FD9;
+    --brand-blue-light: #CFEAF8;
     --brand-yellow: #FFD54F;
     --brand-yellow-deep: #F5B800;
     --brand-navy: #0E2740;
@@ -146,30 +148,25 @@
     margin:14px auto 0;
   }
 
-  /* ========================= SP版 FV (375x812) 上下分割 ========================= */
+  /* ========================= SP版 FV (375x812) FV全体を写真+コピーで埋める ========================= */
   .fv-sp {
     position:relative; width:375px; height:812px;
     background:#fff;
     overflow:hidden;
     border:1px solid #ccc;
     border-radius:32px;
-    color:var(--brand-navy);
+    color:#fff;
   }
-  /* 写真エリア=ヘッダー直下の上半分 */
+  /* 写真エリア=ヘッダー直下から下部CTAまで全部埋める */
   .fv-sp .photo {
-    position:absolute; top:86px; left:0; right:0; height:360px;
-    background-size:cover; background-position:center 25%;
+    position:absolute; top:88px; left:0; right:0; bottom:0;
+    background-size:cover; background-position:center 35%;
   }
+  /* グラデ=写真上に水色オーバーレイ+下に暗化でコピー可読性 */
   .fv-sp .gradient {
-    position:absolute; top:86px; left:0; right:0; height:360px;
+    position:absolute; top:88px; left:0; right:0; bottom:0;
     background:
-      linear-gradient(180deg, rgba(91,195,222,0.0) 0%, rgba(91,195,222,0.0) 70%, rgba(255,255,255,0.7) 100%);
-  }
-  /* コピーエリア=写真下の白/水色グラデ背景 */
-  .fv-sp .copy-area {
-    position:absolute; top:446px; left:0; right:0; bottom:60px;
-    background:linear-gradient(180deg, #ffffff 0%, #eaf6fb 100%);
-    padding:24px 24px 0;
+      linear-gradient(180deg, rgba(96,186,232,0.18) 0%, rgba(96,186,232,0.08) 30%, rgba(14,39,64,0.0) 50%, rgba(14,39,64,0.55) 80%, rgba(14,39,64,0.78) 100%);
   }
   /* SP版ヘッダー = 2段固定:白背景でクリーンに */
   .fv-sp .header {
@@ -207,37 +204,42 @@
     flex-shrink:0;
     text-shadow:0 1px 2px rgba(14,39,64,0.15);
   }
+  /* コピーエリア=写真の下半分にoverlay */
   .fv-sp .copy {
-    /* コピーエリア内部=上下分割の下段 */
+    position:absolute; left:24px; right:24px; bottom:88px;
+    z-index:5;
   }
   .fv-sp .copy .tag {
     font-family:"Cormorant Garamond",serif; font-weight:500; font-size:10px;
     letter-spacing:0.35em; color:#fff; text-transform:uppercase;
-    margin-bottom:8px; display:inline-block;
-    background:var(--brand-blue-deep); padding:4px 10px; border-radius:2px;
-    box-shadow:0 2px 8px rgba(42,143,176,0.3);
+    margin-bottom:10px; display:inline-block;
+    background:var(--brand-blue-deep); padding:5px 12px; border-radius:2px;
+    box-shadow:0 2px 8px rgba(0,143,217,0.4);
   }
   .fv-sp .copy .tag-ja {
-    font-family:"Noto Sans JP",sans-serif; font-size:11px; font-weight:600;
-    letter-spacing:0.16em; color:var(--brand-blue-deep);
-    margin-bottom:14px;
+    font-family:"Noto Sans JP",sans-serif; font-size:12px; font-weight:600;
+    letter-spacing:0.18em; color:#fff;
+    margin-bottom:18px;
+    text-shadow:0 1px 8px rgba(14,39,64,0.55);
   }
   .fv-sp .copy .main {
     font-family:"Shippori Mincho",serif; font-weight:800;
-    font-size:54px; line-height:1.05; letter-spacing:0.04em;
-    color:var(--brand-navy); margin-bottom:14px;
-    display:flex; flex-direction:column; gap:2px;
+    font-size:68px; line-height:1.05; letter-spacing:0.04em;
+    color:#fff; margin-bottom:18px;
+    display:flex; flex-direction:column; gap:4px;
+    text-shadow:0 4px 18px rgba(14,39,64,0.6), 0 2px 6px rgba(14,39,64,0.4);
   }
   .fv-sp .copy .main .br-comma { display:block; width:100%; }
   .fv-sp .copy .main .line2 { display:block; width:100%; }
   .fv-sp .copy .sub {
     font-family:"Noto Serif JP",serif; font-weight:500;
-    font-size:13px; line-height:1.65; color:var(--brand-navy);
+    font-size:14px; line-height:1.65; color:#fff;
     letter-spacing:0.06em;
     padding-top:12px;
     border-top:2px solid var(--brand-yellow);
+    text-shadow:0 1px 8px rgba(14,39,64,0.5);
   }
-  .fv-sp .copy .sub b { font-weight:700; color:var(--brand-blue-deep); padding:0 2px; }
+  .fv-sp .copy .sub b { font-weight:700; color:var(--brand-yellow); padding:0 3px; }
   .fv-sp .cta-bottom {
     position:absolute; bottom:0; left:0; right:0;
     background:var(--brand-yellow); color:var(--brand-navy);
@@ -252,10 +254,10 @@
     content:'→'; font-family:"Noto Sans JP",sans-serif;
   }
 
-  /* 写真切替(AI生成:実写感+日本制服+自然な日本人受験生) */
-  .photo-A { background-image:url('assets/real-1.jpg'); background-position:center 35%; }
-  .photo-B { background-image:url('assets/real-2.jpg'); background-position:center 28%; }
-  .photo-C { background-image:url('assets/real-3.jpg'); background-position:center 30%; }
+  /* 写真切替(AI生成:紺ブレザー+赤リボン+引き構図) */
+  .photo-A { background-image:url('assets/br-1.jpg'); background-position:center 40%; }
+  .photo-B { background-image:url('assets/br-2.jpg'); background-position:center 30%; }
+  .photo-C { background-image:url('assets/br-3.jpg'); background-position:center 35%; }
 
   /* PC版コンパクト表示用スケール */
   .scale-pc { transform:scale(0.55); transform-origin:top left; margin-bottom:-405px; width:1442px; }
