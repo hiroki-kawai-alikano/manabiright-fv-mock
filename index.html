@@ -258,6 +258,8 @@
   .photo-A { background-image:url('assets/imagen-1.png'); background-position:center 40%; }
   .photo-B { background-image:url('assets/imagen-2.png'); background-position:center 50%; }
   .photo-C { background-image:url('assets/imagen-3.png'); background-position:center 50%; }
+  /* SPはCだけ被写体右寄りのため右側を優先表示 */
+  .fv-sp .photo.photo-C { background-position:75% 40%; }
 
   /* PC版コンパクト表示用スケール */
   .scale-pc { transform:scale(0.55); transform-origin:top left; margin-bottom:-405px; width:1442px; }
